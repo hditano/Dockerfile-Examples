@@ -1,0 +1,16 @@
+services:
+  frontend:
+    image: node:16.1-alpine
+    build: .
+    working_dir: /usr/src/app
+    volumes:
+      - ./app.py:/usr/src/app/app.py
+    command: >
+      /bin/sh -c "apk update && apk add unzip python3 curl && \
+      curl -L https://github.com/docker-hy/material-applications/archive/refs/heads/main.zip -o frontend.zip && \
+      unzip frontend.zip && cd material-applications-main/example-frontend && \
+      ls && npm install && npm run build && \
+      npm install -g serve && \
+      serve -s -l 5000 build"
+    ports:
+      - 5000:5000

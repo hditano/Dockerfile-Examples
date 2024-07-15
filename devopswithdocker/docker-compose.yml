@@ -1,0 +1,8 @@
+services:
+  yt-dlp:
+    image: devopsdockeruh/simple-web-service
+    build: .
+    volumes:
+      - /home/hernan/Docker/devopswithdocker/logs/:/usr/src/app/
+    container_name: yt-dlp
+    command: ["server", "http://www.google.com"]

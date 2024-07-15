@@ -1,0 +1,16 @@
+services:
+  frontend:
+    image: frontend
+    ports:
+      - 5000:5000
+
+  backend:
+    image: backend
+    environment:
+      - REDIS_HOST=redis
+    ports:
+      - 8000:8000
+
+  redis:
+    image: redis:latest
+    container_name: redis

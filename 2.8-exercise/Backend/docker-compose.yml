@@ -1,0 +1,18 @@
+services:
+  backend:
+    image: golang:1.23rc1-alpine3.20
+    build: .
+    working_dir: /usr/bin/app
+    command: >
+      /bin/sh -c "apk update && \
+      apk add -y --no-cache curl && \
+      curl -L https://github.com/docker-hy/material-applications/archive/refs/heads/main.zip -o backend.zip && \
+      unzip backend.zip && \
+      ls && cd /usr/bin/app/material-applications-main/example-backend/ && \
+      ls && go build && \
+      ./server"
+    ports:
+      - 8000:8000
+    environment:
+      - PORT=8000
+      - REQUEST_ORIGIN=http://localhost:5000
